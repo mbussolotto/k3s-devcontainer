@@ -30,7 +30,7 @@ function k3s-install() {
 
   
   printInfoSection "Installing K3s"
-  curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--write-kubeconfig-mode 644 --disable traefik" sh -
+  curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--write-kubeconfig-mode 644" sh -
 
   # https://docs.k3s.io/cluster-access#accessing-the-cluster-from-outside-with-kubectl
   
@@ -48,9 +48,6 @@ function k3s-install() {
   sudo cp /etc/rancher/k3s/k3s.yaml /app/.kube/config
   sudo chmod 777 -R /app/.kube
 
-  printInfoSection "Setting up NGINX Ingress"
-  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
-  
   # https://helm.sh/docs/intro/install/#from-script
   printInfoSection " Installing Helm"
   cd /tmp
@@ -64,7 +61,6 @@ function k3s-install() {
   helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
   helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
   
-
   # In the functions you can specify the amount of retries and the NS
   waitForAllPods
   printInfoSection " kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8001:443 --address=\"0.0.0.0\", (${attempts}/${max_attempts}) sleep 10s"
