@@ -9,7 +9,6 @@ on: # yamllint disable-line rule:truthy
 
 jobs:
   docker-build-push-k3s-devcontainer:
-    if: ${{ vars.REBUILD_CONTAINERS_IMAGE == 'true' }}
     runs-on: ubuntu-latest
 
     steps:
