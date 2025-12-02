@@ -1,4 +1,4 @@
-# K3s Dev Container
+# K3s Dev Container 
 
 A Dev Container running K3s, Kubernetes Dashboard and Helm Dashboard with a bunch of other goodies for you to use. This will accelerate your Kubernetes Developer workflow, giving you instant access to Kubernetes in a Docker container. Using this Dev Container will give you a K3s Kubernetes installation in minutes. 
 
